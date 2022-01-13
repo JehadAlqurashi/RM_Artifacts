@@ -1,5 +1,11 @@
 # RM_Artifacts
-RM_Artifacts tool help you to delete all your artifacts in windows 
+
+[+] Disable Prefetch From Registry
+[+] Delete Prefetch Files
+[+] Disable History And Recent Files From Registry
+[+] Delete History and Recents Files
+
+
 <h3>installations</h3>
 <pre>
 git clone gh repo clone RedVirus0/RM_Artifacts
