@@ -1,8 +1,8 @@
 # RM_Artifacts
 
-[+] Disable Prefetch From Registry
-[+] Delete Prefetch Files
-[+] Disable History And Recent Files From Registry
+[+] Disable Prefetch From Registry<br>
+[+] Delete Prefetch Files<br>
+[+] Disable History And Recent Files From Registry<br>
 [+] Delete History and Recents Files
 
 
