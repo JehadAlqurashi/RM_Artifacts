@@ -34,6 +34,7 @@ class RE:
                 winreg.CloseKey(connect)
                 winreg.CloseKey(Prefetch)
                 run(["powershell", "Set-Service -Name 'SysMain' -Status stopped -StartupType disabled"], capture_output=True)
+                print("[+] Disable Prefetch From Registry")
                 try:
                     chmod(directroyPrefetch, 0o777)
                     rmtree(directroyPrefetch, ignore_errors=True)
@@ -45,6 +46,7 @@ class RE:
                 connect = winreg.ConnectRegistry(None,winreg.HKEY_LOCAL_MACHINE)
                 Recent = winreg.OpenKey(connect,regPathRecent,0,winreg.KEY_ALL_ACCESS)
                 winreg.SetValueEx(Recent,"NoRecentDocsHistory",0,winreg.REG_DWORD,1)
+                print("[+] Disable History And Recent Files From Registry")
                 try:
                     chmod(directoryHistroy, 0o777)
                     rmtree(directoryHistroy, ignore_errors=True)
