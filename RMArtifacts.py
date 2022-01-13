@@ -24,6 +24,7 @@ class RE:
                 winreg.CloseKey(Prefetch)
                 #stop service SysMain
                 run(["powershell", "Stop-Service -Name 'SysMain'"], capture_output=True)
+                run(["powershell", "Clear-RecycleBin -Force"], capture_output=True)
                 try:
                     chmod(directroyPrefetch, 0o777)
                     rmtree(directroyPrefetch, ignore_errors=True)
