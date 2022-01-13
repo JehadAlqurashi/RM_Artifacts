@@ -9,6 +9,16 @@ from subprocess import run
 class RE:
     
     def __init__(self):
+        print("""
+        
+    ____  __  ___     ___         __  _ ____           __      
+   / __ \/  |/  /    /   |  _____/ /_(_) __/___ ______/ /______
+  / /_/ / /|_/ /    / /| | / ___/ __/ / /_/ __ `/ ___/ __/ ___/
+ / _, _/ /  / /    / ___ |/ /  / /_/ / __/ /_/ / /__/ /_(__  ) 
+/_/ |_/_/  /_/____/_/  |_/_/   \__/_/_/  \__,_/\___/\__/____/  
+            /_____/                                            
+
+        """)
         directroyPrefetch = "C:\\Windows\\Prefetch\\"
         if windll.shell32.IsUserAnAdmin():
             if platform != "win32":
@@ -22,12 +32,12 @@ class RE:
                 winreg.SetValueEx(Prefetch,"EnableSuperfetch",0,winreg.REG_DWORD,0)
                 winreg.CloseKey(connect)
                 winreg.CloseKey(Prefetch)
-                #stop service SysMain
-                run(["powershell", "Stop-Service -Name 'SysMain'"], capture_output=True)
-                run(["powershell", "Clear-RecycleBin -Force"], capture_output=True)
+                run(["powershell", "Set-Service -Name 'SysMain' -Status stopped -StartupType disabled"], capture_output=True)
                 try:
                     chmod(directroyPrefetch, 0o777)
                     rmtree(directroyPrefetch, ignore_errors=True)
+                    run(["powershell", "Clear-RecycleBin -Force"], capture_output=True)
+                    
                     print("[+]PreFetch Directory Deleted Successfully")
                 except:
                     print("[+] PreFetch Directory Already Deleted Successfully")
