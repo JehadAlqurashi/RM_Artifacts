@@ -1,6 +1,6 @@
 #Simple Script to Remove Windows Artifacts
 import winreg
-from os import chmod
+from os import chmod,getlogin
 from sys import platform
 from ctypes import windll
 import stat
@@ -20,6 +20,7 @@ class RE:
 
         """)
         directroyPrefetch = "C:\\Windows\\Prefetch\\"
+        directoryHistroy = "C:\\Users\\"+getlogin()+"\\AppData\\Local\\Microsoft\\Windows\\History"
         if windll.shell32.IsUserAnAdmin():
             if platform != "win32":
                 exit()
@@ -36,14 +37,28 @@ class RE:
                 try:
                     chmod(directroyPrefetch, 0o777)
                     rmtree(directroyPrefetch, ignore_errors=True)
-                    run(["powershell", "Clear-RecycleBin -Force"], capture_output=True)
-                    
-                    print("[+]PreFetch Directory Deleted Successfully")
+                    print("[+] PreFetch Directory Deleted Successfully")
                 except:
                     print("[+] PreFetch Directory Already Deleted Successfully")
+                #Disable Recent Files Opend From Registry
+                regPathRecent = "SOFTWARE\Microsoft\Windows\CurrentVersion\Policies\Explorer"
+                connect = winreg.ConnectRegistry(None,winreg.HKEY_LOCAL_MACHINE)
+                Recent = winreg.OpenKey(connect,regPathRecent,0,winreg.KEY_ALL_ACCESS)
+                winreg.SetValueEx(Recent,"NoRecentDocsHistory",0,winreg.REG_DWORD,1)
+                try:
+                    chmod(directoryHistroy, 0o777)
+                    rmtree(directoryHistroy, ignore_errors=True)
+                    run(["powershell", "Clear-RecycleBin -Force"], capture_output=True)
+                    print("[+] History Directory Deleted Successfully")
+                    print("[+] Recent Directory Deleted Successfully")
+                except:
+                     print("[+] History Directory Already Deleted Successfully")
+                     print("[+] Recent Directory Deleted Successfully")
+                
+                
                 
         else:
             print("Please Run As Administrator")
-
-
+            
+    
 ob = RE()
