@@ -1,5 +1,5 @@
 # RM_Artifacts
-RM_Artifacts Tool Help You to delete All Your Artifacts in windows 
+RM_Artifacts tool help you to delete all your artifacts in windows 
 <h3>installations</h3>
 <pre>
 git clone gh repo clone RedVirus0/RM_Artifacts
